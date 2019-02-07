@@ -4,21 +4,19 @@ class Builder():
     def __init__(self, splitter, 
                  max_depth = None, 
                  min_leaf_size = 1,
-                 classifier=False,
-                 n_jobs=1):
+                 classifier=False):
         self.splitter = splitter
         self.max_depth = max_depth
         self.min_leaf_size = min_leaf_size
-        self.labels = []#np.empty((0, ), dtype=float)
-        self.probas = []#np.empty((0, classes), dtype=float)
-        self.indices = []# np.empty((0, ), dtype=int)
-        self.values = []# np.empty((0, ), dtype=float)
-        self.left = []#np.empty((0, ), dtype=int)
-        self.right = []# np.empty((0, ), dtype=int) 
+        self.labels = []
+        self.probas = []
+        self.indices = []
+        self.values = []
+        self.left = []
+        self.right = []
         self.classes = None
         self.classifier = classifier
         self.n_nodes = 0
-        self.n_jobs = n_jobs
         self.depth = 0
 
     def fit(self, X, y):
@@ -85,7 +83,6 @@ class Splitter():
                 if g > gain: 
                     idx, val, gain, mask = i,v,g,m
         return idx, val, mask
-    
     
     def _information_gain(self, y, mask):
         impurity = self.criterion(y)
